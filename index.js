@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors = require("cors")
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -9,6 +10,8 @@ const { connect } = require("./Database/index.js");
 const verifyAdminAccess = require("./Middleware/index.js")
 connect();
 
+app.use(bodyParser.json())
+app.use(cors({origin: "http://localhost:5173"}));
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST");

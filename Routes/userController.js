@@ -5,11 +5,14 @@ const bcrypt = require("bcryptjs");
 
 router.post("/addUser", async (req, res) => {
     try {
-        let { name, email, password } = req.body;
+        let { name, email, password, accessLevel, age, phoneNumber } = req.body;
         const user = new User({
             name,
             email,
-            password: await bcrypt.hash(password, 10)
+            password: await bcrypt.hash(password, 10),
+            accessLevel,
+            age,
+            phoneNumber
         });
         await user.save();
         return res.status(200).json({ message: "User added successfully" });
