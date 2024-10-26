@@ -5,7 +5,6 @@ const router = express.Router();
 router.get("/getTeamData", async (req, res) => {
     try {
         const employees = await Employees.find();
-
         const refinedSet = employees.map(item => ({
             id: item._id,
             ...item._doc
