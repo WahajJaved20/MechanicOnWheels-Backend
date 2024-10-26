@@ -1,4 +1,3 @@
-const { connect } = require("http2");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -6,7 +5,9 @@ const { MONGO_URI } = process.env;
 
 exports.connect = () => {
   mongoose
-    .connect(MONGO_URI)
+    .connect(MONGO_URI, {
+      dbName: "MechanicOnWheels"
+    })
     .then(() => {
       console.log("Successfully connected to database ");
     })

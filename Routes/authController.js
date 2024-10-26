@@ -3,12 +3,12 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const Users = require("../Models/userModel");
+const Employees = require("../Models/employeeModel");
 
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await Users.findOne({ email });
+        const user = await Employees.findOne({ email });
         if (!user) {
             return res.status(400).json({ message: "Invalid email or password" });
         }

@@ -26,9 +26,11 @@ app.get("/", (req, res) => {
 const authController = require("./Routes/authController")
 app.use("/", authController);
 
-const userController = require("./routes/userController");
-app.use("/user", verifyAdminAccess, userController);
+const employeeController = require("./Routes/userController");
+app.use("/employee", verifyAdminAccess, employeeController);
 
+const teamController = require("./Routes/teamController");
+app.use("/team", teamController);
 
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
