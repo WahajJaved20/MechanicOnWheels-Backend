@@ -15,10 +15,10 @@ router.post("/addNewEmployee", async (req, res) => {
             phoneNumber
         });
         await employee.save();
-        return res.status(200).json({ message: "Employees added successfully" });
+        return res.status(200).json({ type: "Success" });
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Internal Server Error" });
+        return res.status(500).json({ type: "Failure", message: "Internal Server Error" });
     }
 })
 

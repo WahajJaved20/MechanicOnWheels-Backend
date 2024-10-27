@@ -9,11 +9,11 @@ module.exports = async (req, res, next) => {
     const verified = jwt.verify(fullToken, process.env.TOKEN_KEY);
     console.log(verified)
     let user = await User.findById(verified._id);
-    if (!user) return res.status(400).send({ message: "Invalid Token" });
+    if (!user) return res.status(400).send({ message: "Invalid Auth Token, Please Login Again" });
     req.user = user;
     if (user.accessLevel !== "admin") return res.status(403).send({ message: "Access denied." });
     next();
   } catch (error) {
-    res.status(400).send({ message: "Invalid Token" });
+    res.status(400).send({ message: "Invalid Auth Token, Please Login Again" });
   }
 };
