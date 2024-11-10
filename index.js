@@ -12,6 +12,7 @@ connect();
 
 app.use(bodyParser.json())
 app.use(cors({origin: "http://localhost:5173"}));
+app.use(cors({origin: "https://mechanic-on-wheels-backend.vercel.app/"}))
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -28,7 +29,8 @@ const authController = require("./Routes/authController")
 app.use("/", authController);
 
 const employeeController = require("./Routes/userController");
-app.use("/employee", verifyAdminAccess, employeeController);
+app.use("/employee", employeeController);
+// app.use("/employee", verifyAdminAccess, employeeController);
 
 const teamController = require("./Routes/teamController");
 app.use("/team", teamController);
