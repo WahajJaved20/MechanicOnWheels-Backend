@@ -11,7 +11,7 @@ const verifyAdminAccess = require("./Middleware/index.js")
 connect();
 
 app.use(bodyParser.json())
-app.use(cors({origin: "http://localhost:5173"}));
+// app.use(cors({origin: "http://localhost:5173"}));
 app.use(cors({origin: "https://mechanic-on-wheels-backend.vercel.app"}))
 
 app.use((req, res, next) => {
