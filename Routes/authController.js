@@ -19,7 +19,7 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({ message: "Invalid password" });
         }
 
-        const token = jwt.sign({ _id: user._id }, process.env.TOKEN_KEY, { expiresIn: 60 * 60 });
+        const token = jwt.sign({ _id: user._id }, process.env.TOKEN_KEY, { expiresIn: 60 * 60 * 24 });
         return res.status(200).json({ token: token, name: user.name, type: "Success" });
     } catch (error) {
         console.log(error);
@@ -27,4 +27,25 @@ router.post("/login", async (req, res) => {
     }
 })
 
+router.post('/verifyJWT', async (req, res) => {
+	try {
+		const { jwtToken } = req.body;
+		let decodedToken;
+		if (!jwtToken) {
+			res.status(200).json({ message: 'Invalid JWT Token', type: "Failed" });
+			return;
+		}
+		try {
+			decodedToken = jwt.verify(jwtToken, secretKey);
+		} catch (error) {
+			console.error(error);
+			res.status(200).json({ message: 'Invalid JWT Token', type: "Failed" });
+			return;
+		}
+		res.status(200).json({ message: decodedToken, type: "Success" });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ message: 'Internal Server Error' });
+	}
+});
 module.exports = router;
