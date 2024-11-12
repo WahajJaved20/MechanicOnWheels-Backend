@@ -29,8 +29,8 @@ const authController = require("./Routes/authController")
 app.use("/", authController);
 
 const employeeController = require("./Routes/userController");
-app.use("/employee", employeeController);
-// app.use("/employee", verifyAdminAccess, employeeController);
+// app.use("/employee", employeeController);
+app.use("/employee", verifyAdminAccess, employeeController);
 
 const teamController = require("./Routes/teamController");
 app.use("/team", teamController);
