@@ -2,11 +2,10 @@ const jwt = require("jsonwebtoken");
 const User = require("../Models/employeeModel");
 
 module.exports = async (req, res, next) => {
-  const fullToken = req.header("Authorization");
-  console.log(fullToken)
-  if (!fullToken) return res.status(401).send({ message: "Access denied." });
+  const {authToken} = req.body;
+  if (!authToken) return res.status(401).send({ message: "Access denied." });
   try {
-    const verified = jwt.verify(fullToken, process.env.TOKEN_KEY);
+    const verified = jwt.verify(authToken, process.env.TOKEN_KEY);
     console.log(verified)
     let user = await User.findById(verified._id);
     if (!user) return res.status(400).send({ message: "Invalid Auth Token, Please Login Again" });
