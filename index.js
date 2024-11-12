@@ -12,7 +12,7 @@ connect();
 
 app.use(bodyParser.json())
 // app.use(cors({origin: "http://localhost:5173"}));
-// app.use(cors({origin: "https://mechanic-on-wheels-frontend.vercel.app"}))
+app.use(cors({origin: "https://mechanic-on-wheels-frontend.vercel.app"}))
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
