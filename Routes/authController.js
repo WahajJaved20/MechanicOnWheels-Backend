@@ -36,7 +36,7 @@ router.post('/verifyJWT', async (req, res) => {
 			return;
 		}
 		try {
-			decodedToken = jwt.verify(jwtToken, secretKey);
+			decodedToken = jwt.verify(jwtToken, process.env.TOKEN_KEY);
 		} catch (error) {
 			console.error(error);
 			res.status(200).json({ message: 'Invalid JWT Token', type: "Failed" });
