@@ -11,8 +11,8 @@ const verifyAdminAccess = require("./Middleware/index.js")
 connect();
 
 app.use(bodyParser.json())
-// app.use(cors({origin: "http://localhost:5173"}));
-app.use(cors({origin: "https://mechanic-on-wheels-frontend.vercel.app"}))
+app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "https://mechanic-on-wheels-frontend.vercel.app" }))
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -37,7 +37,7 @@ app.use("/team", teamController);
 
 const inspectionController = require("./Routes/inspectionController")
 app.use("/inspection", inspectionController);
- 
+
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });
